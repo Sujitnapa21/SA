@@ -66,12 +66,18 @@ const useStyles = makeStyles(theme => ({
     employee: number;
   }
 
-  const paTient: FC<{}> = () => {
+  const patient: FC<{}> = () => {
     const classes = useStyles();
     //const http = new DefaultApi();
     const api= new DefaultApi();
   
     const [patient, setPatient] = React.useState<Partial<Patient>>({});
+    const [name, setName] = React.useState<Partial<Patient>>({});
+    const [idcard, setIdcard] = React.useState<Partial<Patient>>({});
+    const [address, setAddress] = React.useState<Partial<Patient>>({});
+    const [congenital, setCongenital] = React.useState<Partial<Patient>>({});
+    const [allergic, setAllergi] = React.useState<Partial<Patient>>({});
+  
 
     const [employees, setEmployees] = React.useState<EntEmployee[]>([]);
     const [statuss, setStatuss] = React.useState<EntStatus[]>([]);
@@ -135,7 +141,7 @@ const useStyles = makeStyles(theme => ({
     const handleChange = (
       event: React.ChangeEvent<{ name?: string; value: unknown }>,
     ) => {
-      const name = event.target.name as keyof typeof paTient;
+      const name = event.target.name as keyof typeof patient;
       const { value } = event.target;
       setPatient({ ...patient, [name]: value });
       console.log(patient);
@@ -150,7 +156,7 @@ const useStyles = makeStyles(theme => ({
 
 // function save data
 function save() {
-  const apiUrl = 'http://localhost:8080/api/v1/patient';
+  const apiUrl = 'http://localhost:8080/api/v1/patients';
   const requestOptions = {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -196,6 +202,7 @@ function save() {
             <TextField
                 style={{ marginTop: 20 }}
                 id="idcard"
+                name="idcard"
                 label="กรอกเลขบัตรประจำตัวประชาชน"
                 variant="outlined"
                 type="intrger"
@@ -267,6 +274,7 @@ function save() {
             <TextField
                 style={{ marginTop: 20 }}
                 id="name"
+                name="name"
                 label="กรอกชื่อ-นามสกุล"
                 variant="outlined"
                 type="string"
@@ -337,6 +345,7 @@ function save() {
             <TextField
                 style={{ marginTop: 20 }}
                 id="address"
+                name="address"
                 label="กรอกที่อยู่"
                 variant="outlined"
                 type="string"
@@ -359,6 +368,7 @@ function save() {
             <TextField
                 style={{ marginTop: 20 }}
                 id="congenital"
+                name="congenital"
                 label="โรคประจำตัว"
                 variant="outlined"
                 type="string"
@@ -379,7 +389,8 @@ function save() {
             <FormControl>
             <TextField
                 style={{ marginTop: 20 }}
-                id="congenital"
+                id="allergic"
+                name="allergic"
                 label="ประวัติการแพ้ยา"
                 variant="outlined"
                 type="string"
@@ -434,8 +445,4 @@ function save() {
     </Page>
   );
 };
-
-
-
-
-  export default Patient;
+  export default patient;
