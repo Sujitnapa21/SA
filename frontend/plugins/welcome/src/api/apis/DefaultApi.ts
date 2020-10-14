@@ -79,6 +79,11 @@ export interface GetStatusRequest {
     id: number;
 }
 
+export interface ListBloodtypeRequest {
+    limit?: number;
+    offset?: number;
+}
+
 export interface ListEmployeeRequest {
     limit?: number;
     offset?: number;
@@ -476,6 +481,42 @@ export class DefaultApi extends runtime.BaseAPI {
      */
     async getStatus(requestParameters: GetStatusRequest): Promise<EntStatus> {
         const response = await this.getStatusRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
+     * list bloodtype entities
+     * List bloodtype entities
+     */
+    async listBloodtypeRaw(requestParameters: ListBloodtypeRequest): Promise<runtime.ApiResponse<Array<EntBloodtype>>> {
+        const queryParameters: runtime.HTTPQuery = {};
+
+        if (requestParameters.limit !== undefined) {
+            queryParameters['limit'] = requestParameters.limit;
+        }
+
+        if (requestParameters.offset !== undefined) {
+            queryParameters['offset'] = requestParameters.offset;
+        }
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        const response = await this.request({
+            path: `/bloodtypes`,
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(EntBloodtypeFromJSON));
+    }
+
+    /**
+     * list bloodtype entities
+     * List bloodtype entities
+     */
+    async listBloodtype(requestParameters: ListBloodtypeRequest): Promise<Array<EntBloodtype>> {
+        const response = await this.listBloodtypeRaw(requestParameters);
         return await response.value();
     }
 

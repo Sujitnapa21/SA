@@ -78,6 +78,51 @@ var doc = `{
             }
         },
         "/bloodtypes": {
+            "get": {
+                "description": "list bloodtype entities",
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "List bloodtype entities",
+                "operationId": "list-bloodtype",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Limit",
+                        "name": "limit",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Offset",
+                        "name": "offset",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/ent.Bloodtype"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/gin.H"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/gin.H"
+                        }
+                    }
+                }
+            },
             "post": {
                 "description": "Create bloodtype",
                 "consumes": [

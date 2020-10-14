@@ -15,6 +15,13 @@ type EmployeeController struct {
 	router gin.IRouter
 }
 
+// Employee defines the struct for the employee controller
+type Employee struct {
+	Name   string
+	Email  string
+	UserID string
+}
+
 // CreateEmployee handles POST requests for adding employee entities
 // @Summary Create employee
 // @Description Create employee

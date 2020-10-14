@@ -89,16 +89,16 @@ func (ctl *BloodtypeController) GetBloodtype(c *gin.Context) {
 }
 
 // ListBloodtype handles request to get a list of bloodtype entities
-// @Summary Get a bloodtype entity by ID
-// @Description get bloodtype by ID
-// @ID get-bloodtype
-// @Produce  json
-// @Param id path int true "Bloodtype ID"
-// @Success 200 {object} ent.Bloodtype
+// @Summary List bloodtype entities
+// @Description list bloodtype entities
+// @ID list-bloodtype
+// @Produce json
+// @Param limit  query int false "Limit"
+// @Param offset query int false "Offset"
+// @Success 200 {array} ent.Bloodtype
 // @Failure 400 {object} gin.H
-// @Failure 404 {object} gin.H
 // @Failure 500 {object} gin.H
-// @Router /bloodtypes/{id} [get]
+// @Router /bloodtypes [get]
 func (ctl *BloodtypeController) ListBloodtype(c *gin.Context) {
 	limitQuery := c.Query("limit")
 	limit := 10

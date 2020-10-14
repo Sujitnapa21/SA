@@ -166,7 +166,7 @@ func (ctl *PatientController) ListPatient(c *gin.Context) {
 		}
 	}
 
-	patient, err := ctl.client.Patient.
+	patients, err := ctl.client.Patient.
 		Query().
 		WithStatus().
 		WithNametitle().
@@ -184,7 +184,7 @@ func (ctl *PatientController) ListPatient(c *gin.Context) {
 		return
 	}
 
-	c.JSON(200, patient)
+	c.JSON(200, patients)
 }
 
 // NewPatientController creates and registers handles for the patient controller

@@ -22,5 +22,6 @@ func (Bloodtype) Fields() []ent.Field {
 func (Bloodtype) Edges() []ent.Edge {
 	return []ent.Edge{
 		edge.To("patient", Patient.Type),
+		edge.To("patients", Patient.Type).StorageKey(edge.Column("bloodtype_id")),
 	}
 }

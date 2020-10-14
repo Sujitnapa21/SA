@@ -24,5 +24,6 @@ func (Employee) Fields() []ent.Field {
 func (Employee) Edges() []ent.Edge {
 	return []ent.Edge{
 		edge.To("patient", Patient.Type),
+		edge.To("employees", Employee.Type).StorageKey(edge.Column("employee_id")),
 	}
 }
