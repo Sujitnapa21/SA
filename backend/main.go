@@ -148,6 +148,7 @@ func main() {
 	// Set Statuss Data
 	statuss := Statuss{
 		Status: []Status{
+			Status{"นักเรียน"},
 			Status{"นักศึกษา"},
 			Status{"บุคลากร"},
 			Status{"บุคคลทั่วไป"},
