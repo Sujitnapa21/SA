@@ -22,6 +22,6 @@ func (Gender) Fields() []ent.Field {
 func (Gender) Edges() []ent.Edge {
 	return []ent.Edge{
 		edge.To("patient", Patient.Type),
-		edge.To("genders", Gender.Type).StorageKey(edge.Column("gender_id")),
+	
 	}
 }

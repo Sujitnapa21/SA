@@ -17,8 +17,7 @@ type BloodtypeController struct {
 
 // Bloodtype defines the struct for the bloodtype controller
 type Bloodtype struct {
-	Name     string
-	Employee int
+	Name string
 }
 
 // CreateBloodtype handles POST requests for adding bloodtype entities

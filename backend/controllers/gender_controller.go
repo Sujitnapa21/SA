@@ -15,13 +15,10 @@ type GenderController struct {
 	router gin.IRouter
 }
 
-
 // Gender defines the struct for the gender controller
 type Gender struct {
-	Name     string
-	Employee int
+	Name string
 }
-
 
 // CreateGender handles POST requests for adding gender entities
 // @Summary Create gender
@@ -44,7 +41,7 @@ func (ctl *GenderController) CreateGender(c *gin.Context) {
 	}
 
 	g, err := ctl.client.Gender.
-		Create(). 
+		Create().
 		SetName(obj.Name).
 		Save(context.Background())
 	if err != nil {

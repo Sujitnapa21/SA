@@ -25,12 +25,6 @@ definitions:
     type: object
   ent.Employee:
     properties:
-      Email:
-        description: Email holds the value of the "Email" field.
-        type: string
-      Name:
-        description: Name holds the value of the "Name" field.
-        type: string
       User_id:
         description: UserID holds the value of the "User_id" field.
         type: string

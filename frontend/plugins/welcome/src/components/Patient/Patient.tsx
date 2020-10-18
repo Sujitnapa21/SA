@@ -49,6 +49,11 @@ const useStyles = makeStyles(theme => ({
   selectEmpty: {
     marginTop: theme.spacing(2),
   },
+
+  header: {
+    textAlign: 'center'
+  },
+
   buttonSty: {
     margin: 'auto',
     display: 'block',
@@ -152,6 +157,7 @@ const Patient: FC<{}> = () => {
   // clear input form
   function clear() {
     setPatient({});
+    setShowInputError(false);
   }
 
   // function save data
@@ -220,7 +226,7 @@ const Patient: FC<{}> = () => {
         <Grid container spacing={3}>
 
           <Grid item xs={10}>
-            <h2 > ข้อมูลประจำตัวผู้ป่วย </h2>
+            <h2 style= {{ textAlign: 'center'}} >ข้อมูลประจำตัวผู้ป่วย </h2>
           </Grid>
 
           <Grid item xs={10}>
@@ -348,7 +354,7 @@ const Patient: FC<{}> = () => {
           </Grid>
 
           <Grid item xs={10}>
-            <h2 > ข้อมูลทางการแพทย์ </h2>
+            <h2 style= {{ textAlign: 'center'}}> ข้อมูลทางการแพทย์ </h2>
           </Grid>
 
           <Grid item xs={10}>
@@ -392,7 +398,7 @@ const Patient: FC<{}> = () => {
                 {employees.map(item => {
                   return (
                     <MenuItem key={item.id} value={item.id}>
-                      {item.name}
+                      {item.userId}
                     </MenuItem>
                   );
                 })}
@@ -410,7 +416,7 @@ const Patient: FC<{}> = () => {
               className={classes.buttonSty}
               onClick={save}
             >
-              บันทึกข้อมูลผู้ป่วย
+              บันทึกข้อมูล
               </Button>
           </Grid>
         </Grid>

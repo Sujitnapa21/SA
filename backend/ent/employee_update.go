@@ -28,18 +28,6 @@ func (eu *EmployeeUpdate) Where(ps ...predicate.Employee) *EmployeeUpdate {
 	return eu
 }
 
-// SetEmail sets the Email field.
-func (eu *EmployeeUpdate) SetEmail(s string) *EmployeeUpdate {
-	eu.mutation.SetEmail(s)
-	return eu
-}
-
-// SetName sets the Name field.
-func (eu *EmployeeUpdate) SetName(s string) *EmployeeUpdate {
-	eu.mutation.SetName(s)
-	return eu
-}
-
 // SetUserID sets the User_id field.
 func (eu *EmployeeUpdate) SetUserID(s string) *EmployeeUpdate {
 	eu.mutation.SetUserID(s)
@@ -151,20 +139,6 @@ func (eu *EmployeeUpdate) sqlSave(ctx context.Context) (n int, err error) {
 			}
 		}
 	}
-	if value, ok := eu.mutation.Email(); ok {
-		_spec.Fields.Set = append(_spec.Fields.Set, &sqlgraph.FieldSpec{
-			Type:   field.TypeString,
-			Value:  value,
-			Column: employee.FieldEmail,
-		})
-	}
-	if value, ok := eu.mutation.Name(); ok {
-		_spec.Fields.Set = append(_spec.Fields.Set, &sqlgraph.FieldSpec{
-			Type:   field.TypeString,
-			Value:  value,
-			Column: employee.FieldName,
-		})
-	}
 	if value, ok := eu.mutation.UserID(); ok {
 		_spec.Fields.Set = append(_spec.Fields.Set, &sqlgraph.FieldSpec{
 			Type:   field.TypeString,
@@ -226,18 +200,6 @@ type EmployeeUpdateOne struct {
 	config
 	hooks    []Hook
 	mutation *EmployeeMutation
-}
-
-// SetEmail sets the Email field.
-func (euo *EmployeeUpdateOne) SetEmail(s string) *EmployeeUpdateOne {
-	euo.mutation.SetEmail(s)
-	return euo
-}
-
-// SetName sets the Name field.
-func (euo *EmployeeUpdateOne) SetName(s string) *EmployeeUpdateOne {
-	euo.mutation.SetName(s)
-	return euo
 }
 
 // SetUserID sets the User_id field.
@@ -349,20 +311,6 @@ func (euo *EmployeeUpdateOne) sqlSave(ctx context.Context) (e *Employee, err err
 		return nil, &ValidationError{Name: "ID", err: fmt.Errorf("missing Employee.ID for update")}
 	}
 	_spec.Node.ID.Value = id
-	if value, ok := euo.mutation.Email(); ok {
-		_spec.Fields.Set = append(_spec.Fields.Set, &sqlgraph.FieldSpec{
-			Type:   field.TypeString,
-			Value:  value,
-			Column: employee.FieldEmail,
-		})
-	}
-	if value, ok := euo.mutation.Name(); ok {
-		_spec.Fields.Set = append(_spec.Fields.Set, &sqlgraph.FieldSpec{
-			Type:   field.TypeString,
-			Value:  value,
-			Column: employee.FieldName,
-		})
-	}
 	if value, ok := euo.mutation.UserID(); ok {
 		_spec.Fields.Set = append(_spec.Fields.Set, &sqlgraph.FieldSpec{
 			Type:   field.TypeString,

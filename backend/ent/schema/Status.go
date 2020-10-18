@@ -22,6 +22,6 @@ func (Status) Fields() []ent.Field {
 func (Status) Edges() []ent.Edge {
 	return []ent.Edge{
 		edge.To("patient", Patient.Type),
-		edge.To("statuss", Status.Type).StorageKey(edge.Column("status_id")),
+		
 	}
 }

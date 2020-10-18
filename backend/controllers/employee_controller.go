@@ -17,8 +17,6 @@ type EmployeeController struct {
 
 // Employee defines the struct for the employee controller
 type Employee struct {
-	Name   string
-	Email  string
 	UserID string
 }
 
@@ -44,8 +42,6 @@ func (ctl *EmployeeController) CreateEmployee(c *gin.Context) {
 
 	e, err := ctl.client.Employee.
 		Create().
-		SetName(obj.Name).
-		SetEmail(obj.Email).
 		SetUserID(obj.UserID).
 		Save(context.Background())
 	if err != nil {

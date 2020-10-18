@@ -23,8 +23,6 @@ var (
 	// EmployeesColumns holds the columns for the "employees" table.
 	EmployeesColumns = []*schema.Column{
 		{Name: "id", Type: field.TypeInt, Increment: true},
-		{Name: "email", Type: field.TypeString},
-		{Name: "name", Type: field.TypeString},
 		{Name: "user_id", Type: field.TypeString},
 	}
 	// EmployeesTable holds the schema information for the "employees" table.

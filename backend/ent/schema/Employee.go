@@ -14,8 +14,6 @@ type Employee struct {
 // Fields of the Employee.
 func (Employee) Fields() []ent.Field {
 	return []ent.Field{
-		field.String("Email"),
-		field.String("Name"),
 		field.String("User_id"),
 	}
 }
@@ -24,6 +22,6 @@ func (Employee) Fields() []ent.Field {
 func (Employee) Edges() []ent.Edge {
 	return []ent.Edge{
 		edge.To("patient", Patient.Type),
-		edge.To("employees", Employee.Type).StorageKey(edge.Column("employee_id")),
+		
 	}
 }

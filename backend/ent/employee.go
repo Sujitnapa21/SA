@@ -15,10 +15,6 @@ type Employee struct {
 	config `json:"-"`
 	// ID of the ent.
 	ID int `json:"id,omitempty"`
-	// Email holds the value of the "Email" field.
-	Email string `json:"Email,omitempty"`
-	// Name holds the value of the "Name" field.
-	Name string `json:"Name,omitempty"`
 	// UserID holds the value of the "User_id" field.
 	UserID string `json:"User_id,omitempty"`
 	// Edges holds the relations/edges for other nodes in the graph.
@@ -48,8 +44,6 @@ func (e EmployeeEdges) PatientOrErr() ([]*Patient, error) {
 func (*Employee) scanValues() []interface{} {
 	return []interface{}{
 		&sql.NullInt64{},  // id
-		&sql.NullString{}, // Email
-		&sql.NullString{}, // Name
 		&sql.NullString{}, // User_id
 	}
 }
@@ -67,17 +61,7 @@ func (e *Employee) assignValues(values ...interface{}) error {
 	e.ID = int(value.Int64)
 	values = values[1:]
 	if value, ok := values[0].(*sql.NullString); !ok {
-		return fmt.Errorf("unexpected type %T for field Email", values[0])
-	} else if value.Valid {
-		e.Email = value.String
-	}
-	if value, ok := values[1].(*sql.NullString); !ok {
-		return fmt.Errorf("unexpected type %T for field Name", values[1])
-	} else if value.Valid {
-		e.Name = value.String
-	}
-	if value, ok := values[2].(*sql.NullString); !ok {
-		return fmt.Errorf("unexpected type %T for field User_id", values[2])
+		return fmt.Errorf("unexpected type %T for field User_id", values[0])
 	} else if value.Valid {
 		e.UserID = value.String
 	}
@@ -112,10 +96,6 @@ func (e *Employee) String() string {
 	var builder strings.Builder
 	builder.WriteString("Employee(")
 	builder.WriteString(fmt.Sprintf("id=%v", e.ID))
-	builder.WriteString(", Email=")
-	builder.WriteString(e.Email)
-	builder.WriteString(", Name=")
-	builder.WriteString(e.Name)
 	builder.WriteString(", User_id=")
 	builder.WriteString(e.UserID)
 	builder.WriteByte(')')

@@ -270,12 +270,12 @@ func (eq *EmployeeQuery) WithPatient(opts ...func(*PatientQuery)) *EmployeeQuery
 // Example:
 //
 //	var v []struct {
-//		Email string `json:"Email,omitempty"`
+//		UserID string `json:"User_id,omitempty"`
 //		Count int `json:"count,omitempty"`
 //	}
 //
 //	client.Employee.Query().
-//		GroupBy(employee.FieldEmail).
+//		GroupBy(employee.FieldUserID).
 //		Aggregate(ent.Count()).
 //		Scan(ctx, &v)
 //
@@ -296,11 +296,11 @@ func (eq *EmployeeQuery) GroupBy(field string, fields ...string) *EmployeeGroupB
 // Example:
 //
 //	var v []struct {
-//		Email string `json:"Email,omitempty"`
+//		UserID string `json:"User_id,omitempty"`
 //	}
 //
 //	client.Employee.Query().
-//		Select(employee.FieldEmail).
+//		Select(employee.FieldUserID).
 //		Scan(ctx, &v)
 //
 func (eq *EmployeeQuery) Select(field string, fields ...string) *EmployeeSelect {

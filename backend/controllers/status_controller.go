@@ -17,8 +17,7 @@ type StatusController struct {
 
 // Status defines the struct for the status controller
 type Status struct {
-	Name     string
-	Employee int
+	Name string
 }
 
 // CreateStatus handles POST requests for adding status entities

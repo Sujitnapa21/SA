@@ -7,10 +7,6 @@ const (
 	Label = "employee"
 	// FieldID holds the string denoting the id field in the database.
 	FieldID = "id"
-	// FieldEmail holds the string denoting the email field in the database.
-	FieldEmail = "email"
-	// FieldName holds the string denoting the name field in the database.
-	FieldName = "name"
 	// FieldUserID holds the string denoting the user_id field in the database.
 	FieldUserID = "user_id"
 
@@ -31,7 +27,5 @@ const (
 // Columns holds all SQL columns for employee fields.
 var Columns = []string{
 	FieldID,
-	FieldEmail,
-	FieldName,
 	FieldUserID,
 }

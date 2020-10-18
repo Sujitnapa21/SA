@@ -19,8 +19,6 @@ type Employees struct {
 
 // Employee  defines the struct for the employee
 type Employee struct {
-	Name   string
-	Email  string
 	UserID string
 }
 
@@ -131,16 +129,14 @@ func main() {
 	// Set Employees Data
 	employees := Employees{
 		Employee: []Employee{
-			Employee{"คิม จงอิน", "kim@gmail.com", "D12345"},
-			Employee{"โอ เซฮุน", "hunnie@gmail.com", "D54231"},
+			Employee{"D12345"},
+			Employee{"D54231"},
 		},
 	}
 
 	for _, e := range employees.Employee {
 		client.Employee.
 			Create().
-			SetName(e.Name).
-			SetEmail(e.Email).
 			SetUserID(e.UserID).
 			Save(context.Background())
 	}

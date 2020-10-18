@@ -20,18 +20,6 @@ type EmployeeCreate struct {
 	hooks    []Hook
 }
 
-// SetEmail sets the Email field.
-func (ec *EmployeeCreate) SetEmail(s string) *EmployeeCreate {
-	ec.mutation.SetEmail(s)
-	return ec
-}
-
-// SetName sets the Name field.
-func (ec *EmployeeCreate) SetName(s string) *EmployeeCreate {
-	ec.mutation.SetName(s)
-	return ec
-}
-
 // SetUserID sets the User_id field.
 func (ec *EmployeeCreate) SetUserID(s string) *EmployeeCreate {
 	ec.mutation.SetUserID(s)
@@ -60,12 +48,6 @@ func (ec *EmployeeCreate) Mutation() *EmployeeMutation {
 
 // Save creates the Employee in the database.
 func (ec *EmployeeCreate) Save(ctx context.Context) (*Employee, error) {
-	if _, ok := ec.mutation.Email(); !ok {
-		return nil, &ValidationError{Name: "Email", err: errors.New("ent: missing required field \"Email\"")}
-	}
-	if _, ok := ec.mutation.Name(); !ok {
-		return nil, &ValidationError{Name: "Name", err: errors.New("ent: missing required field \"Name\"")}
-	}
 	if _, ok := ec.mutation.UserID(); !ok {
 		return nil, &ValidationError{Name: "User_id", err: errors.New("ent: missing required field \"User_id\"")}
 	}
@@ -129,22 +111,6 @@ func (ec *EmployeeCreate) createSpec() (*Employee, *sqlgraph.CreateSpec) {
 			},
 		}
 	)
-	if value, ok := ec.mutation.Email(); ok {
-		_spec.Fields = append(_spec.Fields, &sqlgraph.FieldSpec{
-			Type:   field.TypeString,
-			Value:  value,
-			Column: employee.FieldEmail,
-		})
-		e.Email = value
-	}
-	if value, ok := ec.mutation.Name(); ok {
-		_spec.Fields = append(_spec.Fields, &sqlgraph.FieldSpec{
-			Type:   field.TypeString,
-			Value:  value,
-			Column: employee.FieldName,
-		})
-		e.Name = value
-	}
 	if value, ok := ec.mutation.UserID(); ok {
 		_spec.Fields = append(_spec.Fields, &sqlgraph.FieldSpec{
 			Type:   field.TypeString,

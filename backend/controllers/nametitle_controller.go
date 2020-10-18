@@ -17,8 +17,7 @@ type NameTitleController struct {
 
 // NameTitle defines the struct for the nametitle controller
 type NameTitle struct {
-	Name     string
-	Employee int
+	Name string
 }
 
 // CreateNameTitle handles POST requests for adding nametitle entities
