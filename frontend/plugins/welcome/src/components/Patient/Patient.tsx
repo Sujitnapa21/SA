@@ -2,6 +2,7 @@ import React, { FC, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
+import Link from '@material-ui/core/Link';
 import Swal from 'sweetalert2'; // alert
 import {
   AppBar,
@@ -60,7 +61,12 @@ const useStyles = makeStyles(theme => ({
     maxWidth: '100%',
     maxHeight: '100%',
     marginBottom: 50
-  }
+  },
+  logoutButton: {
+    marginLeft: 10,
+    marginRight: 10,
+    color: 'white'
+  },
 
 }));
 
@@ -88,8 +94,8 @@ interface Patient {
 const Patient: FC<{}> = () => {
   const classes = useStyles();
   const api = new DefaultApi();
-  
-  const [showInputError,setShowInputError] = React.useState(false); // for error input show
+
+  const [showInputError, setShowInputError] = React.useState(false); // for error input show
   const [patient, setPatient] = React.useState<Partial<Patient>>({});
   const [employees, setEmployees] = React.useState<EntEmployee[]>([]);
   const [statuss, setStatuss] = React.useState<EntStatus[]>([]);
@@ -111,26 +117,26 @@ const Patient: FC<{}> = () => {
   });
 
   const getEmployee = async () => {
-    const res = await api.listEmployee({ limit: 10, offset: 0 });
+    const res = await api.listEmployee({ limit: 2, offset: 0 });
     setEmployees(res);
   };
 
   const getStatus = async () => {
-    const res = await api.listStatus({ limit: 10, offset: 0 });
+    const res = await api.listStatus({ limit: 4, offset: 0 });
     setStatuss(res);
   };
 
   const getNameTitle = async () => {
-    const res = await api.listNametitle({ limit: 10, offset: 0 });
+    const res = await api.listNametitle({ limit: 5, offset: 0 });
     setNametitles(res);
   };
 
   const getBloodtype = async () => {
-    const res = await api.listBloodtype({ limit: 10, offset: 0 });
+    const res = await api.listBloodtype({ limit: 4, offset: 0 });
     setBloodtypes(res);
   };
   const getGender = async () => {
-    const res = await api.listGender({ limit: 10, offset: 0 });
+    const res = await api.listGender({ limit: 2, offset: 0 });
     setGenders(res);
   };
 
@@ -163,8 +169,8 @@ const Patient: FC<{}> = () => {
   // function save data
   function save() {
     setShowInputError(true)
-    let {idcard,name,address,congenital,allergic} = patient;
-    if( !idcard || !name || !address || !congenital || !allergic){
+    let { idcard, name, address, congenital, allergic } = patient;
+    if (!idcard || !name || !address || !congenital || !allergic) {
       Toast.fire({
         icon: 'error',
         title: 'กรอกให้ครบด้วยนะจ๊ะ',
@@ -198,6 +204,11 @@ const Patient: FC<{}> = () => {
         }
       })
   }
+  //Java 
+  function redirecLogOut() {
+    //redirec Page ... http://localhost:3000/
+    window.location.href = "http://localhost:3000/";
+  }
 
   return (
     <div className={classes.root}>
@@ -215,8 +226,16 @@ const Patient: FC<{}> = () => {
               aria-controls="menu-appbar"
               aria-haspopup="true"
               color="inherit"
+
             >
+
+
               <AccountCircle />
+              <Typography>
+                <Link variant="h6" onClick={redirecLogOut} className={classes.logoutButton}>
+                  LOGOUT
+                </Link>
+              </Typography>
             </IconButton>
           </div>
         </Toolbar>
@@ -226,7 +245,7 @@ const Patient: FC<{}> = () => {
         <Grid container spacing={3}>
 
           <Grid item xs={10}>
-            <h2 style= {{ textAlign: 'center'}} >ข้อมูลประจำตัวผู้ป่วย </h2>
+            <h2 style={{ textAlign: 'center' }} >ข้อมูลประจำตัวผู้ป่วย </h2>
           </Grid>
 
           <Grid item xs={10}>
@@ -289,7 +308,7 @@ const Patient: FC<{}> = () => {
           <Grid item xs={10}>
             <TextField
               required={true}
-              error={!patient.name && showInputError}            
+              error={!patient.name && showInputError}
               name="name"
               label="ชื่อ-นามสกุล"
               variant="outlined"
@@ -354,7 +373,7 @@ const Patient: FC<{}> = () => {
           </Grid>
 
           <Grid item xs={10}>
-            <h2 style= {{ textAlign: 'center'}}> ข้อมูลทางการแพทย์ </h2>
+            <h2 style={{ textAlign: 'center' }}> ข้อมูลทางการแพทย์ </h2>
           </Grid>
 
           <Grid item xs={10}>

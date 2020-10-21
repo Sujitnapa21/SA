@@ -30,7 +30,7 @@ function Copyright() {
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    height: '100vh',
+    height: '98vh',
   },
   image: {
     backgroundImage: 'url(https://i0.wp.com/www.korseries.com/wp-content/uploads/2017/09/romantic-doctor.jpg?fit=1352%2C806&ssl=1)',
@@ -123,7 +123,7 @@ const Login: FC<{}> = () => {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            LOGIN TO Disease
+            LOGIN 
           </Typography>
           <form className={classes.form} noValidate>
             <TextField

@@ -27,18 +27,6 @@ import {
  */
 export interface EntEmployee {
     /**
-     * Email holds the value of the "Email" field.
-     * @type {string}
-     * @memberof EntEmployee
-     */
-    email?: string;
-    /**
-     * Name holds the value of the "Name" field.
-     * @type {string}
-     * @memberof EntEmployee
-     */
-    name?: string;
-    /**
      * UserID holds the value of the "User_id" field.
      * @type {string}
      * @memberof EntEmployee
@@ -68,8 +56,6 @@ export function EntEmployeeFromJSONTyped(json: any, ignoreDiscriminator: boolean
     }
     return {
         
-        'email': !exists(json, 'Email') ? undefined : json['Email'],
-        'name': !exists(json, 'Name') ? undefined : json['Name'],
         'userId': !exists(json, 'User_id') ? undefined : json['User_id'],
         'edges': !exists(json, 'edges') ? undefined : EntEmployeeEdgesFromJSON(json['edges']),
         'id': !exists(json, 'id') ? undefined : json['id'],
@@ -85,8 +71,6 @@ export function EntEmployeeToJSON(value?: EntEmployee | null): any {
     }
     return {
         
-        'Email': value.email,
-        'Name': value.name,
         'User_id': value.userId,
         'edges': EntEmployeeEdgesToJSON(value.edges),
         'id': value.id,
