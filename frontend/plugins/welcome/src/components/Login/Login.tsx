@@ -18,7 +18,7 @@ import Swal from 'sweetalert2'; // alert
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © KOB4k | '}
+      {'Copyright © Sujitnapa21 | '}
       <Link color="inherit" href="https://github.com/KOB4k/SA-63_G7.git">
         Your Github
       </Link>{' '}

@@ -84,11 +84,11 @@ export function EntPatientEdgesFromJSONTyped(json: any, ignoreDiscriminator: boo
     }
     return {
         
-        'bloodtype': !exists(json, 'bloodtype') ? undefined : EntBloodtypeFromJSON(json['bloodtype']),
-        'employee': !exists(json, 'employee') ? undefined : EntEmployeeFromJSON(json['employee']),
-        'gender': !exists(json, 'gender') ? undefined : EntGenderFromJSON(json['gender']),
-        'nametitle': !exists(json, 'nametitle') ? undefined : EntNameTitleFromJSON(json['nametitle']),
-        'status': !exists(json, 'status') ? undefined : EntStatusFromJSON(json['status']),
+        'bloodtype': !exists(json, 'Bloodtype') ? undefined : EntBloodtypeFromJSON(json['Bloodtype']),
+        'employee': !exists(json, 'Employee') ? undefined : EntEmployeeFromJSON(json['Employee']),
+        'gender': !exists(json, 'Gender') ? undefined : EntGenderFromJSON(json['Gender']),
+        'nametitle': !exists(json, 'Nametitle') ? undefined : EntNameTitleFromJSON(json['Nametitle']),
+        'status': !exists(json, 'Status') ? undefined : EntStatusFromJSON(json['Status']),
     };
 }
 

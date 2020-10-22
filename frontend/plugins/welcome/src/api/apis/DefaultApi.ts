@@ -59,6 +59,10 @@ export interface CreateStatusRequest {
     status: EntStatus;
 }
 
+export interface DeletePatientRequest {
+    id: number;
+}
+
 export interface GetBloodtypeRequest {
     id: number;
 }
@@ -107,6 +111,11 @@ export interface ListPatientRequest {
 export interface ListStatusRequest {
     limit?: number;
     offset?: number;
+}
+
+export interface UpdatePatientRequest {
+    id: number;
+    patienttype: EntPatient;
 }
 
 /**
@@ -321,6 +330,38 @@ export class DefaultApi extends runtime.BaseAPI {
      */
     async createStatus(requestParameters: CreateStatusRequest): Promise<EntStatus> {
         const response = await this.createStatusRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
+     * get patient by ID
+     * Delete a patient entity by ID
+     */
+    async deletePatientRaw(requestParameters: DeletePatientRequest): Promise<runtime.ApiResponse<object>> {
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deletePatient.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        const response = await this.request({
+            path: `/patients/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
+            method: 'DELETE',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.JSONApiResponse<any>(response);
+    }
+
+    /**
+     * get patient by ID
+     * Delete a patient entity by ID
+     */
+    async deletePatient(requestParameters: DeletePatientRequest): Promise<object> {
+        const response = await this.deletePatientRaw(requestParameters);
         return await response.value();
     }
 
@@ -697,6 +738,45 @@ export class DefaultApi extends runtime.BaseAPI {
      */
     async listStatus(requestParameters: ListStatusRequest): Promise<Array<EntStatus>> {
         const response = await this.listStatusRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
+     * update patient by ID
+     * Update a patient entity by ID
+     */
+    async updatePatientRaw(requestParameters: UpdatePatientRequest): Promise<runtime.ApiResponse<EntPatient>> {
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updatePatient.');
+        }
+
+        if (requestParameters.patienttype === null || requestParameters.patienttype === undefined) {
+            throw new runtime.RequiredError('patienttype','Required parameter requestParameters.patienttype was null or undefined when calling updatePatient.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        const response = await this.request({
+            path: `/patients/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
+            method: 'PUT',
+            headers: headerParameters,
+            query: queryParameters,
+            body: EntPatientToJSON(requestParameters.patienttype),
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => EntPatientFromJSON(jsonValue));
+    }
+
+    /**
+     * update patient by ID
+     * Update a patient entity by ID
+     */
+    async updatePatient(requestParameters: UpdatePatientRequest): Promise<EntPatient> {
+        const response = await this.updatePatientRaw(requestParameters);
         return await response.value();
     }
 
