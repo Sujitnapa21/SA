@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"fmt"
 	"context"
 	"strconv"
 
@@ -129,6 +130,82 @@ func (ctl *GenderController) ListGender(c *gin.Context) {
 
 	c.JSON(200, genders)
 }
+// DeleteGender handles DELETE requests to delete a gender entity
+// @Summary Delete a gender entity by ID
+// @Description get gender by ID
+// @ID delete-gender
+// @Produce  json
+// @Param id path int true "Gender ID"
+// @Success 200 {object} gin.H
+// @Failure 400 {object} gin.H
+// @Failure 404 {object} gin.H
+// @Failure 500 {object} gin.H
+// @Router /genders/{id} [delete]
+func (ctl *GenderController) DeleteGender(c *gin.Context) {
+	id, err := strconv.ParseInt(c.Param("id"), 10, 64)
+	if err != nil {
+		c.JSON(400, gin.H{
+			"error": err.Error(),
+		})
+		return
+	}
+
+	err = ctl.client.Gender.
+		DeleteOneID(int(id)).
+		Exec(context.Background())
+	if err != nil {
+		c.JSON(404, gin.H{
+			"error": err.Error(),
+		})
+		return
+	}
+
+	c.JSON(200, gin.H{"result": fmt.Sprintf("ok deleted %v", id)})
+}
+
+// UpdateGender handles PUT requests to update a gender entity
+// @Summary Update a gender entity by ID
+// @Description update gender by ID
+// @ID update-gender
+// @Accept   json
+// @Produce  json
+// @Param id path int true "Gender ID"
+// @Param gendertype body ent.Gender true "Gender entity"
+// @Success 200 {object} ent.Gender
+// @Failure 400 {object} gin.H
+// @Failure 500 {object} gin.H
+// @Router /genders/{id} [put]
+func (ctl *GenderController) UpdateGender(c *gin.Context) {
+	id, err := strconv.ParseInt(c.Param("id"), 10, 64)
+	if err != nil {
+		c.JSON(400, gin.H{
+			"error": err.Error(),
+		})
+		return
+	}
+
+	obj := ent.Gender{}
+	if err := c.ShouldBind(&obj); err != nil {
+		c.JSON(400, gin.H{
+			"error": "gender binding failed",
+		})
+		return
+	}
+	obj.ID = int(id)
+	fmt.Println(obj.ID)
+	g, err := ctl.client.Gender.
+		UpdateOneID(int(id)).
+		SetName(obj.Name).
+		Save(context.Background())
+	if err != nil {
+		c.JSON(400, gin.H{
+			"error": "update failed",
+		})
+		return
+	}
+
+	c.JSON(200, g)
+}
 
 // NewGenderController creates and registers handles for the Gender controller
 func NewGenderController(router gin.IRouter, client *ent.Client) *GenderController {
@@ -146,4 +223,6 @@ func (ctl *GenderController) register() {
 	genders.GET("", ctl.ListGender)
 	genders.POST("", ctl.CreateGender)
 	genders.GET(":id", ctl.GetGender)
+	genders.PUT("id", ctl.UpdateGender)
+	genders.DELETE(":id", ctl.DeleteGender)
 }

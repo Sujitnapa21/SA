@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"fmt"
 	"context"
 	"strconv"
 
@@ -129,6 +130,83 @@ func (ctl *BloodtypeController) ListBloodtype(c *gin.Context) {
 
 	c.JSON(200, bloodtypes)
 }
+// DeleteBloodtype handles DELETE requests to delete a bloodtype entity
+// @Summary Delete a bloodtype entity by ID
+// @Description get bloodtype by ID
+// @ID delete-bloodtype
+// @Produce  json
+// @Param id path int true "Bloodtype ID"
+// @Success 200 {object} gin.H
+// @Failure 400 {object} gin.H
+// @Failure 404 {object} gin.H
+// @Failure 500 {object} gin.H
+// @Router /bloodtypes/{id} [delete]
+func (ctl *BloodtypeController) DeleteBloodtype(c *gin.Context) {
+	id, err := strconv.ParseInt(c.Param("id"), 10, 64)
+	if err != nil {
+		c.JSON(400, gin.H{
+			"error": err.Error(),
+		})
+		return
+	}
+
+	err = ctl.client.Bloodtype.
+		DeleteOneID(int(id)).
+		Exec(context.Background())
+	if err != nil {
+		c.JSON(404, gin.H{
+			"error": err.Error(),
+		})
+		return
+	}
+
+	c.JSON(200, gin.H{"result": fmt.Sprintf("ok deleted %v", id)})
+}
+
+// UpdateBloodtype handles PUT requests to update a bloodtype entity
+// @Summary Update a bloodtype entity by ID
+// @Description update bloodtype by ID
+// @ID update-bloodtype
+// @Accept   json
+// @Produce  json
+// @Param id path int true "Bloodtype ID"
+// @Param bloodtypetype body ent.Bloodtype true "Bloodtype entity"
+// @Success 200 {object} ent.Bloodtype
+// @Failure 400 {object} gin.H
+// @Failure 500 {object} gin.H
+// @Router /bloodtypes/{id} [put]
+func (ctl *BloodtypeController) UpdateBloodtype(c *gin.Context) {
+	id, err := strconv.ParseInt(c.Param("id"), 10, 64)
+	if err != nil {
+		c.JSON(400, gin.H{
+			"error": err.Error(),
+		})
+		return
+	}
+
+	obj := ent.Bloodtype{}
+	if err := c.ShouldBind(&obj); err != nil {
+		c.JSON(400, gin.H{
+			"error": "bloodtype binding failed",
+		})
+		return
+	}
+	obj.ID = int(id)
+	fmt.Println(obj.ID)
+	b, err := ctl.client.Bloodtype.
+		UpdateOneID(int(id)).
+		SetName(obj.Name).
+		Save(context.Background())
+	if err != nil {
+		c.JSON(400, gin.H{
+			"error": "update failed",
+		})
+		return
+	}
+
+	c.JSON(200, b)
+}
+
 
 // NewBloodtypeController creates and registers handles for the bloodtype controller
 func NewBloodtypeController(router gin.IRouter, client *ent.Client) *BloodtypeController {
@@ -146,4 +224,7 @@ func (ctl *BloodtypeController) register() {
 	bloodtypes.GET("", ctl.ListBloodtype)
 	bloodtypes.POST("", ctl.CreateBloodtype)
 	bloodtypes.GET(":id", ctl.GetBloodtype)
+	bloodtypes.PUT("id", ctl.UpdateBloodtype)
+	bloodtypes.DELETE(":id", ctl.DeleteBloodtype)
+
 }

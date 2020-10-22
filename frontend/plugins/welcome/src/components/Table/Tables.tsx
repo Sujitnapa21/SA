@@ -27,30 +27,27 @@ export default function ComponentsTable() {
      setLoading(false);
      setPatients(res);
    };
+
    getPatients();
  }, [loading]);
  
 
- const deletePatients = async (id: number) => {
-   const res = await api.deletePatient({ id: id });
-   setLoading(true);
- };
  
  return (
    <TableContainer component={Paper}>
      <Table className={classes.table} aria-label="simple table">
        <TableHead>
          <TableRow>
-           <TableCell align="center">Idcard</TableCell>
-           <TableCell align="center">Status</TableCell>
-           <TableCell align="center">Nametitle</TableCell>
-           <TableCell align="center">Name</TableCell>
-           <TableCell align="center">Gender</TableCell>
-           <TableCell align="center">Bloodtype</TableCell>
-           <TableCell align="center">Address</TableCell>
-           <TableCell align="center">Congenital</TableCell>
-           <TableCell align="center">Allergic</TableCell>
-           <TableCell align="center">Employee</TableCell>
+           <TableCell align="center">เลขบัตรประจำตัวประชาชน</TableCell>
+           <TableCell align="center">สถานะ</TableCell>
+           <TableCell align="center">คำนำหน้าชื่อ</TableCell>
+           <TableCell align="center">ชื่อ-นามสกุล</TableCell>
+           <TableCell align="center">เพศ</TableCell>
+           <TableCell align="center">หมู่เลือด</TableCell>
+           <TableCell align="center">ที่อยู่</TableCell>
+           <TableCell align="center">โรคประจำตัว</TableCell>
+           <TableCell align="center">ประวัติแพ้ยา</TableCell>
+           <TableCell align="center">ผู้บันทึก</TableCell>
            
          </TableRow>
        </TableHead>
@@ -69,17 +66,8 @@ export default function ComponentsTable() {
              <TableCell align="center">{item.allergic}</TableCell>
              <TableCell align="center">{item.edges?.employee?.userId}</TableCell>
              <TableCell align="center">
-               <Button
-                 onClick={() => {
-                   deletePatients(item.id);
-                 }}
-                 style={{ marginLeft: 10 }}
-                 variant="contained"
-                 color="secondary"
-               >
-                 Delete
-               </Button>
-             </TableCell>
+              
+                            </TableCell>
            </TableRow>
          ))}
        </TableBody>

@@ -59,7 +59,27 @@ export interface CreateStatusRequest {
     status: EntStatus;
 }
 
+export interface DeleteBloodtypeRequest {
+    id: number;
+}
+
+export interface DeleteEmployeeRequest {
+    id: number;
+}
+
+export interface DeleteGenderRequest {
+    id: number;
+}
+
+export interface DeleteNametitleRequest {
+    id: number;
+}
+
 export interface DeletePatientRequest {
+    id: number;
+}
+
+export interface DeleteStatusRequest {
     id: number;
 }
 
@@ -113,9 +133,34 @@ export interface ListStatusRequest {
     offset?: number;
 }
 
+export interface UpdateBloodtypeRequest {
+    id: number;
+    bloodtypetype: EntBloodtype;
+}
+
+export interface UpdateEmployeeRequest {
+    id: number;
+    employeetype: EntEmployee;
+}
+
+export interface UpdateGenderRequest {
+    id: number;
+    gendertype: EntGender;
+}
+
+export interface UpdateNametitleRequest {
+    id: number;
+    nametitletype: EntNameTitle;
+}
+
 export interface UpdatePatientRequest {
     id: number;
     patienttype: EntPatient;
+}
+
+export interface UpdateStatusRequest {
+    id: number;
+    statustype: EntStatus;
 }
 
 /**
@@ -334,6 +379,134 @@ export class DefaultApi extends runtime.BaseAPI {
     }
 
     /**
+     * get bloodtype by ID
+     * Delete a bloodtype entity by ID
+     */
+    async deleteBloodtypeRaw(requestParameters: DeleteBloodtypeRequest): Promise<runtime.ApiResponse<object>> {
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteBloodtype.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        const response = await this.request({
+            path: `/bloodtypes/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
+            method: 'DELETE',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.JSONApiResponse<any>(response);
+    }
+
+    /**
+     * get bloodtype by ID
+     * Delete a bloodtype entity by ID
+     */
+    async deleteBloodtype(requestParameters: DeleteBloodtypeRequest): Promise<object> {
+        const response = await this.deleteBloodtypeRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
+     * get employee by ID
+     * Delete a employee entity by ID
+     */
+    async deleteEmployeeRaw(requestParameters: DeleteEmployeeRequest): Promise<runtime.ApiResponse<object>> {
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteEmployee.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        const response = await this.request({
+            path: `/employees/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
+            method: 'DELETE',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.JSONApiResponse<any>(response);
+    }
+
+    /**
+     * get employee by ID
+     * Delete a employee entity by ID
+     */
+    async deleteEmployee(requestParameters: DeleteEmployeeRequest): Promise<object> {
+        const response = await this.deleteEmployeeRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
+     * get gender by ID
+     * Delete a gender entity by ID
+     */
+    async deleteGenderRaw(requestParameters: DeleteGenderRequest): Promise<runtime.ApiResponse<object>> {
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteGender.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        const response = await this.request({
+            path: `/genders/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
+            method: 'DELETE',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.JSONApiResponse<any>(response);
+    }
+
+    /**
+     * get gender by ID
+     * Delete a gender entity by ID
+     */
+    async deleteGender(requestParameters: DeleteGenderRequest): Promise<object> {
+        const response = await this.deleteGenderRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
+     * get nametitle by ID
+     * Delete a nametitle entity by ID
+     */
+    async deleteNametitleRaw(requestParameters: DeleteNametitleRequest): Promise<runtime.ApiResponse<object>> {
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteNametitle.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        const response = await this.request({
+            path: `/nametitles/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
+            method: 'DELETE',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.JSONApiResponse<any>(response);
+    }
+
+    /**
+     * get nametitle by ID
+     * Delete a nametitle entity by ID
+     */
+    async deleteNametitle(requestParameters: DeleteNametitleRequest): Promise<object> {
+        const response = await this.deleteNametitleRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
      * get patient by ID
      * Delete a patient entity by ID
      */
@@ -362,6 +535,38 @@ export class DefaultApi extends runtime.BaseAPI {
      */
     async deletePatient(requestParameters: DeletePatientRequest): Promise<object> {
         const response = await this.deletePatientRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
+     * get status by ID
+     * Delete a status entity by ID
+     */
+    async deleteStatusRaw(requestParameters: DeleteStatusRequest): Promise<runtime.ApiResponse<object>> {
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteStatus.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        const response = await this.request({
+            path: `/statuss/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
+            method: 'DELETE',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.JSONApiResponse<any>(response);
+    }
+
+    /**
+     * get status by ID
+     * Delete a status entity by ID
+     */
+    async deleteStatus(requestParameters: DeleteStatusRequest): Promise<object> {
+        const response = await this.deleteStatusRaw(requestParameters);
         return await response.value();
     }
 
@@ -742,6 +947,162 @@ export class DefaultApi extends runtime.BaseAPI {
     }
 
     /**
+     * update bloodtype by ID
+     * Update a bloodtype entity by ID
+     */
+    async updateBloodtypeRaw(requestParameters: UpdateBloodtypeRequest): Promise<runtime.ApiResponse<EntBloodtype>> {
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateBloodtype.');
+        }
+
+        if (requestParameters.bloodtypetype === null || requestParameters.bloodtypetype === undefined) {
+            throw new runtime.RequiredError('bloodtypetype','Required parameter requestParameters.bloodtypetype was null or undefined when calling updateBloodtype.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        const response = await this.request({
+            path: `/bloodtypes/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
+            method: 'PUT',
+            headers: headerParameters,
+            query: queryParameters,
+            body: EntBloodtypeToJSON(requestParameters.bloodtypetype),
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => EntBloodtypeFromJSON(jsonValue));
+    }
+
+    /**
+     * update bloodtype by ID
+     * Update a bloodtype entity by ID
+     */
+    async updateBloodtype(requestParameters: UpdateBloodtypeRequest): Promise<EntBloodtype> {
+        const response = await this.updateBloodtypeRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
+     * update employee by ID
+     * Update a employee entity by ID
+     */
+    async updateEmployeeRaw(requestParameters: UpdateEmployeeRequest): Promise<runtime.ApiResponse<EntEmployee>> {
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateEmployee.');
+        }
+
+        if (requestParameters.employeetype === null || requestParameters.employeetype === undefined) {
+            throw new runtime.RequiredError('employeetype','Required parameter requestParameters.employeetype was null or undefined when calling updateEmployee.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        const response = await this.request({
+            path: `/employees/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
+            method: 'PUT',
+            headers: headerParameters,
+            query: queryParameters,
+            body: EntEmployeeToJSON(requestParameters.employeetype),
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => EntEmployeeFromJSON(jsonValue));
+    }
+
+    /**
+     * update employee by ID
+     * Update a employee entity by ID
+     */
+    async updateEmployee(requestParameters: UpdateEmployeeRequest): Promise<EntEmployee> {
+        const response = await this.updateEmployeeRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
+     * update gender by ID
+     * Update a gender entity by ID
+     */
+    async updateGenderRaw(requestParameters: UpdateGenderRequest): Promise<runtime.ApiResponse<EntGender>> {
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateGender.');
+        }
+
+        if (requestParameters.gendertype === null || requestParameters.gendertype === undefined) {
+            throw new runtime.RequiredError('gendertype','Required parameter requestParameters.gendertype was null or undefined when calling updateGender.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        const response = await this.request({
+            path: `/genders/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
+            method: 'PUT',
+            headers: headerParameters,
+            query: queryParameters,
+            body: EntGenderToJSON(requestParameters.gendertype),
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => EntGenderFromJSON(jsonValue));
+    }
+
+    /**
+     * update gender by ID
+     * Update a gender entity by ID
+     */
+    async updateGender(requestParameters: UpdateGenderRequest): Promise<EntGender> {
+        const response = await this.updateGenderRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
+     * update nametitle by ID
+     * Update a nametitle entity by ID
+     */
+    async updateNametitleRaw(requestParameters: UpdateNametitleRequest): Promise<runtime.ApiResponse<EntNameTitle>> {
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateNametitle.');
+        }
+
+        if (requestParameters.nametitletype === null || requestParameters.nametitletype === undefined) {
+            throw new runtime.RequiredError('nametitletype','Required parameter requestParameters.nametitletype was null or undefined when calling updateNametitle.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        const response = await this.request({
+            path: `/nametitles/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
+            method: 'PUT',
+            headers: headerParameters,
+            query: queryParameters,
+            body: EntNameTitleToJSON(requestParameters.nametitletype),
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => EntNameTitleFromJSON(jsonValue));
+    }
+
+    /**
+     * update nametitle by ID
+     * Update a nametitle entity by ID
+     */
+    async updateNametitle(requestParameters: UpdateNametitleRequest): Promise<EntNameTitle> {
+        const response = await this.updateNametitleRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
      * update patient by ID
      * Update a patient entity by ID
      */
@@ -777,6 +1138,45 @@ export class DefaultApi extends runtime.BaseAPI {
      */
     async updatePatient(requestParameters: UpdatePatientRequest): Promise<EntPatient> {
         const response = await this.updatePatientRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
+     * update status by ID
+     * Update a status entity by ID
+     */
+    async updateStatusRaw(requestParameters: UpdateStatusRequest): Promise<runtime.ApiResponse<EntStatus>> {
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateStatus.');
+        }
+
+        if (requestParameters.statustype === null || requestParameters.statustype === undefined) {
+            throw new runtime.RequiredError('statustype','Required parameter requestParameters.statustype was null or undefined when calling updateStatus.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        const response = await this.request({
+            path: `/statuss/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
+            method: 'PUT',
+            headers: headerParameters,
+            query: queryParameters,
+            body: EntStatusToJSON(requestParameters.statustype),
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => EntStatusFromJSON(jsonValue));
+    }
+
+    /**
+     * update status by ID
+     * Update a status entity by ID
+     */
+    async updateStatus(requestParameters: UpdateStatusRequest): Promise<EntStatus> {
+        const response = await this.updateStatusRaw(requestParameters);
         return await response.value();
     }
 

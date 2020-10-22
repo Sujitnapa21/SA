@@ -271,6 +271,35 @@ paths:
             $ref: '#/definitions/gin.H'
       summary: Create bloodtype
   /bloodtypes/{id}:
+    delete:
+      description: get bloodtype by ID
+      operationId: delete-bloodtype
+      parameters:
+      - description: Bloodtype ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/gin.H'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/gin.H'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/gin.H'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/gin.H'
+      summary: Delete a bloodtype entity by ID
     get:
       description: get bloodtype by ID
       operationId: get-bloodtype
@@ -300,6 +329,39 @@ paths:
           schema:
             $ref: '#/definitions/gin.H'
       summary: Get a bloodtype entity by ID
+    put:
+      consumes:
+      - application/json
+      description: update bloodtype by ID
+      operationId: update-bloodtype
+      parameters:
+      - description: Bloodtype ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Bloodtype entity
+        in: body
+        name: bloodtypetype
+        required: true
+        schema:
+          $ref: '#/definitions/ent.Bloodtype'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/ent.Bloodtype'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/gin.H'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/gin.H'
+      summary: Update a bloodtype entity by ID
   /employees:
     get:
       description: list employee entities
@@ -332,6 +394,35 @@ paths:
             $ref: '#/definitions/gin.H'
       summary: List employee entities
   /employees/{id}:
+    delete:
+      description: get employee by ID
+      operationId: delete-employee
+      parameters:
+      - description: Employee ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/gin.H'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/gin.H'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/gin.H'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/gin.H'
+      summary: Delete a employee entity by ID
     get:
       description: get employee by ID
       operationId: get-employee
@@ -361,6 +452,39 @@ paths:
           schema:
             $ref: '#/definitions/gin.H'
       summary: Get a employee entity by ID
+    put:
+      consumes:
+      - application/json
+      description: update employee by ID
+      operationId: update-employee
+      parameters:
+      - description: Employee ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Employee entity
+        in: body
+        name: employeetype
+        required: true
+        schema:
+          $ref: '#/definitions/ent.Employee'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/ent.Employee'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/gin.H'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/gin.H'
+      summary: Update a employee entity by ID
   /genders:
     get:
       description: list gender entities
@@ -421,6 +545,35 @@ paths:
             $ref: '#/definitions/gin.H'
       summary: Create gender
   /genders/{id}:
+    delete:
+      description: get gender by ID
+      operationId: delete-gender
+      parameters:
+      - description: Gender ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/gin.H'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/gin.H'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/gin.H'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/gin.H'
+      summary: Delete a gender entity by ID
     get:
       description: get gender by ID
       operationId: get-gender
@@ -450,6 +603,39 @@ paths:
           schema:
             $ref: '#/definitions/gin.H'
       summary: Get a gender entity by ID
+    put:
+      consumes:
+      - application/json
+      description: update gender by ID
+      operationId: update-gender
+      parameters:
+      - description: Gender ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Gender entity
+        in: body
+        name: gendertype
+        required: true
+        schema:
+          $ref: '#/definitions/ent.Gender'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/ent.Gender'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/gin.H'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/gin.H'
+      summary: Update a gender entity by ID
   /nametitles:
     get:
       description: list nametitle entities
@@ -510,6 +696,35 @@ paths:
             $ref: '#/definitions/gin.H'
       summary: Create nametitle
   /nametitles/{id}:
+    delete:
+      description: get nametitle by ID
+      operationId: delete-nametitle
+      parameters:
+      - description: NameTitle ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/gin.H'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/gin.H'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/gin.H'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/gin.H'
+      summary: Delete a nametitle entity by ID
     get:
       description: get nametitle by ID
       operationId: get-nametitle
@@ -539,6 +754,39 @@ paths:
           schema:
             $ref: '#/definitions/gin.H'
       summary: Get a nametitle entity by ID
+    put:
+      consumes:
+      - application/json
+      description: update nametitle by ID
+      operationId: update-nametitle
+      parameters:
+      - description: NameTitle ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: NameTitle entity
+        in: body
+        name: nametitletype
+        required: true
+        schema:
+          $ref: '#/definitions/ent.NameTitle'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/ent.NameTitle'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/gin.H'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/gin.H'
+      summary: Update a nametitle entity by ID
   /patients:
     get:
       description: list patient entities
@@ -721,6 +969,35 @@ paths:
             $ref: '#/definitions/gin.H'
       summary: Create status
   /statuss/{id}:
+    delete:
+      description: get status by ID
+      operationId: delete-status
+      parameters:
+      - description: Status ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/gin.H'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/gin.H'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/gin.H'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/gin.H'
+      summary: Delete a status entity by ID
     get:
       description: get status by ID
       operationId: get-status
@@ -750,6 +1027,39 @@ paths:
           schema:
             $ref: '#/definitions/gin.H'
       summary: Get a status entity by ID
+    put:
+      consumes:
+      - application/json
+      description: update status by ID
+      operationId: update-status
+      parameters:
+      - description: Status ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Status entity
+        in: body
+        name: statustype
+        required: true
+        schema:
+          $ref: '#/definitions/ent.Status'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/ent.Status'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/gin.H'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/gin.H'
+      summary: Update a status entity by ID
 securityDefinitions:
   ApiKeyAuth:
     in: header

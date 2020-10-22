@@ -245,7 +245,7 @@ func (ctl *PatientController) UpdatePatient(c *gin.Context) {
 	obj := ent.Patient{}
 	if err := c.ShouldBind(&obj); err != nil {
 		c.JSON(400, gin.H{
-			"error": "patienttype binding failed",
+			"error": "patient binding failed",
 		})
 		return
 	}
@@ -279,7 +279,7 @@ func (ctl *PatientController) register() {
 	patients := ctl.router.Group("/patients")
 	patients.POST("", ctl.CreatePatient)
 	patients.GET("", ctl.ListPatient)
-	patients.PUT("id", ctl.ListPatient)
-	patients.DELETE("id", ctl.ListPatient)
+	patients.PUT("id", ctl.UpdatePatient)
+	patients.DELETE("id", ctl.DeletePatient)
 
 }

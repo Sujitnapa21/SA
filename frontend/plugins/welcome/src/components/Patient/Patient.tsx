@@ -5,6 +5,9 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import Link from '@material-ui/core/Link';
 import Swal from 'sweetalert2'; // alert
 import {
+  Content,
+} from '@backstage/core';
+import {
   AppBar,
   Toolbar,
   Typography,
@@ -16,7 +19,7 @@ import {
   InputLabel,
   Select,
   MenuItem,
-  Button
+  Button,
 } from '@material-ui/core';
 
 // css style 
@@ -209,7 +212,11 @@ const Patient: FC<{}> = () => {
     //redirec Page ... http://localhost:3000/
     window.location.href = "http://localhost:3000/";
   }
-
+//go to welcome page
+function redirecTables() {
+  //redirec Page ... http://localhost:3000/Welcome
+  window.location.href = "http://localhost:3000/WelcomePage";
+}
   return (
     <div className={classes.root}>
       <AppBar position="static">
@@ -220,6 +227,7 @@ const Patient: FC<{}> = () => {
           <Typography variant="h6" className={classes.title}>
             ระบบข้อมูลผู้ป่วย
           </Typography>
+          
           <div>
             <IconButton
               aria-label="account of current user"
@@ -240,6 +248,19 @@ const Patient: FC<{}> = () => {
           </div>
         </Toolbar>
       </AppBar>
+      <Content>
+        <Button
+          name="redirecTable"
+          size="large"
+          variant="contained"
+          color="primary"
+          disableElevation
+          style={{ float: 'right' }}
+          onClick={redirecTables}
+        >
+          แสดงข้อมูล
+              </Button>
+
       <Container maxWidth="sm">
 
         <Grid container spacing={3}>
@@ -440,6 +461,7 @@ const Patient: FC<{}> = () => {
           </Grid>
         </Grid>
       </Container>
+      </Content>
     </div>
   );
 };

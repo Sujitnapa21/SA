@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"fmt"
 	"context"
 	"strconv"
 
@@ -130,6 +131,84 @@ func (ctl *EmployeeController) ListEmployee(c *gin.Context) {
 	c.JSON(200, employees)
 }
 
+// DeleteEmployee handles DELETE requests to delete a employee entity
+// @Summary Delete a employee entity by ID
+// @Description get employee by ID
+// @ID delete-employee
+// @Produce  json
+// @Param id path int true "Employee ID"
+// @Success 200 {object} gin.H
+// @Failure 400 {object} gin.H
+// @Failure 404 {object} gin.H
+// @Failure 500 {object} gin.H
+// @Router /employees/{id} [delete]
+func (ctl *EmployeeController) DeleteEmployee(c *gin.Context) {
+	id, err := strconv.ParseInt(c.Param("id"), 10, 64)
+	if err != nil {
+		c.JSON(400, gin.H{
+			"error": err.Error(),
+		})
+		return
+	}
+
+	err = ctl.client.Employee.
+		DeleteOneID(int(id)).
+		Exec(context.Background())
+	if err != nil {
+		c.JSON(404, gin.H{
+			"error": err.Error(),
+		})
+		return
+	}
+
+	c.JSON(200, gin.H{"result": fmt.Sprintf("ok deleted %v", id)})
+}
+
+// UpdateEmployee handles PUT requests to update a employee entity
+// @Summary Update a employee entity by ID
+// @Description update employee by ID
+// @ID update-employee
+// @Accept   json
+// @Produce  json
+// @Param id path int true "Employee ID"
+// @Param employeetype body ent.Employee true "Employee entity"
+// @Success 200 {object} ent.Employee
+// @Failure 400 {object} gin.H
+// @Failure 500 {object} gin.H
+// @Router /employees/{id} [put]
+func (ctl *EmployeeController) UpdateEmployee(c *gin.Context) {
+	id, err := strconv.ParseInt(c.Param("id"), 10, 64)
+	if err != nil {
+		c.JSON(400, gin.H{
+			"error": err.Error(),
+		})
+		return
+	}
+
+	obj := ent.Employee{}
+	if err := c.ShouldBind(&obj); err != nil {
+		c.JSON(400, gin.H{
+			"error": "employee binding failed",
+		})
+		return
+	}
+	obj.ID = int(id)
+	fmt.Println(obj.ID)
+	e, err := ctl.client.Employee.
+		UpdateOneID(int(id)).
+		SetUserID(obj.UserID).
+		Save(context.Background())
+	if err != nil {
+		c.JSON(400, gin.H{
+			"error": "update failed",
+		})
+		return
+	}
+
+	c.JSON(200, e)
+}
+
+
 // NewEmployeeController creates and registers handles for the employee controller
 func NewEmployeeController(router gin.IRouter, client *ent.Client) *EmployeeController {
 	ec := &EmployeeController{
@@ -146,4 +225,6 @@ func (ctl *EmployeeController) register() {
 	employees.GET("", ctl.ListEmployee)
 	employees.POST("", ctl.CreateEmployee)
 	employees.GET(":id", ctl.GetEmployee)
+	employees.PUT("id", ctl.UpdateEmployee)
+	employees.DELETE(":id", ctl.DeleteEmployee)
 }

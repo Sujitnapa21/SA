@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"fmt"
 	"context"
 	"strconv"
 
@@ -130,6 +131,83 @@ func (ctl *StatusController) ListStatus(c *gin.Context) {
 	c.JSON(200, statuss)
 }
 
+// DeleteStatus handles DELETE requests to delete a status entity
+// @Summary Delete a status entity by ID
+// @Description get status by ID
+// @ID delete-status
+// @Produce  json
+// @Param id path int true "Status ID"
+// @Success 200 {object} gin.H
+// @Failure 400 {object} gin.H
+// @Failure 404 {object} gin.H
+// @Failure 500 {object} gin.H
+// @Router /statuss/{id} [delete]
+func (ctl *StatusController) DeleteStatus(c *gin.Context) {
+	id, err := strconv.ParseInt(c.Param("id"), 10, 64)
+	if err != nil {
+		c.JSON(400, gin.H{
+			"error": err.Error(),
+		})
+		return
+	}
+
+	err = ctl.client.Status.
+		DeleteOneID(int(id)).
+		Exec(context.Background())
+	if err != nil {
+		c.JSON(404, gin.H{
+			"error": err.Error(),
+		})
+		return
+	}
+
+	c.JSON(200, gin.H{"result": fmt.Sprintf("ok deleted %v", id)})
+}
+
+// UpdateStatus handles PUT requests to update a status entity
+// @Summary Update a status entity by ID
+// @Description update status by ID
+// @ID update-status
+// @Accept   json
+// @Produce  json
+// @Param id path int true "Status ID"
+// @Param statustype body ent.Status true "Status entity"
+// @Success 200 {object} ent.Status
+// @Failure 400 {object} gin.H
+// @Failure 500 {object} gin.H
+// @Router /statuss/{id} [put]
+func (ctl *StatusController) UpdateStatus(c *gin.Context) {
+	id, err := strconv.ParseInt(c.Param("id"), 10, 64)
+	if err != nil {
+		c.JSON(400, gin.H{
+			"error": err.Error(),
+		})
+		return
+	}
+
+	obj := ent.Status{}
+	if err := c.ShouldBind(&obj); err != nil {
+		c.JSON(400, gin.H{
+			"error": "status binding failed",
+		})
+		return
+	}
+	obj.ID = int(id)
+	fmt.Println(obj.ID)
+	s, err := ctl.client.Status.
+		UpdateOneID(int(id)).
+		SetName(obj.Name).
+		Save(context.Background())
+	if err != nil {
+		c.JSON(400, gin.H{
+			"error": "update failed",
+		})
+		return
+	}
+
+	c.JSON(200, s)
+}
+
 // NewStatusController creates and registers handles for the status controller
 func NewStatusController(router gin.IRouter, client *ent.Client) *StatusController {
 	sc := &StatusController{
@@ -146,4 +224,6 @@ func (ctl *StatusController) register() {
 	statuss.GET("", ctl.ListStatus)
 	statuss.POST("", ctl.CreateStatus)
 	statuss.GET(":id", ctl.GetStatus)
+	statuss.PUT("id", ctl.UpdateStatus)
+	statuss.DELETE(":id", ctl.DeleteStatus)
 }
