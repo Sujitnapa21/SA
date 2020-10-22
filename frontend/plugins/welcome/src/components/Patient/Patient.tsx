@@ -212,11 +212,11 @@ const Patient: FC<{}> = () => {
     //redirec Page ... http://localhost:3000/
     window.location.href = "http://localhost:3000/";
   }
-//go to welcome page
-function redirecTables() {
-  //redirec Page ... http://localhost:3000/Welcome
-  window.location.href = "http://localhost:3000/WelcomePage";
-}
+  //go to welcome page
+  function redirecTables() {
+    //redirec Page ... http://localhost:3000/Table
+    window.location.href = "http://localhost:3000/Table";
+  }
   return (
     <div className={classes.root}>
       <AppBar position="static">
@@ -227,7 +227,7 @@ function redirecTables() {
           <Typography variant="h6" className={classes.title}>
             ระบบข้อมูลผู้ป่วย
           </Typography>
-          
+
           <div>
             <IconButton
               aria-label="account of current user"
@@ -261,206 +261,206 @@ function redirecTables() {
           แสดงข้อมูล
               </Button>
 
-      <Container maxWidth="sm">
+        <Container maxWidth="sm">
 
-        <Grid container spacing={3}>
+          <Grid container spacing={3}>
 
-          <Grid item xs={10}>
-            <h2 style={{ textAlign: 'center' }} >ข้อมูลประจำตัวผู้ป่วย </h2>
-          </Grid>
+            <Grid item xs={10}>
+              <h2 style={{ textAlign: 'center' }} >ข้อมูลประจำตัวผู้ป่วย </h2>
+            </Grid>
 
-          <Grid item xs={10}>
-            <TextField
-              required={true}
-              error={!patient.idcard && showInputError}
-              id="idcard"
-              name="idcard"
-              type="intrger"
-              label="เลขบัตรประจำตัวประชาชน"
-              variant="outlined"
-              fullWidth
-              multiline
-              value={patient.idcard || ""}
-              onChange={handleChange}
-            />
-          </Grid>
-
-          <Grid item xs={12}>
-            <FormControl variant="outlined" className={classes.formControl}>
-              <InputLabel >สถานะผู้ป่วย</InputLabel>
-              <Select
-                name="status"
-                value={patient.status || ''}
-                onChange={handleChange}
-                label="สถานะผู้ป่วย"
-              >
-                {statuss.map(item => {
-                  return (
-                    <MenuItem key={item.id} value={item.id}>
-                      {item.name}
-                    </MenuItem>
-                  );
-                })}
-              </Select>
-            </FormControl>
-          </Grid>
-
-          <Grid item xs={12}>
-            <FormControl variant="outlined" className={classes.formControl}>
-              <InputLabel >คำนำหน้าชื่อ</InputLabel>
-              <Select
-                name="nametitle"
-                value={patient.nametitle || ''}
-                onChange={handleChange}
-                label="คำนำหน้าชื่อ"
+            <Grid item xs={10}>
+              <TextField
+                required={true}
+                error={!patient.idcard && showInputError}
+                id="idcard"
+                name="idcard"
+                type="intrger"
+                label="เลขบัตรประจำตัวประชาชน"
+                variant="outlined"
                 fullWidth
-              >
-                {nametitles.map(item => {
-                  return (
-                    <MenuItem key={item.id} value={item.id}>
-                      {item.name}
-                    </MenuItem>
-                  );
-                })}
-              </Select>
-            </FormControl>
-          </Grid>
-
-          <Grid item xs={10}>
-            <TextField
-              required={true}
-              error={!patient.name && showInputError}
-              name="name"
-              label="ชื่อ-นามสกุล"
-              variant="outlined"
-              fullWidth
-              multiline
-              value={patient.name || ""}
-              onChange={handleChange}
-            />
-          </Grid>
-
-          <Grid item xs={12}>
-            <FormControl variant="outlined" className={classes.formControl}>
-              <InputLabel>เพศ</InputLabel>
-              <Select
-                name="gender"
-                value={patient.gender || ''}
+                multiline
+                value={patient.idcard || ""}
                 onChange={handleChange}
-                label="เพศ"
-              >
-                {genders.map(item => {
-                  return (
-                    <MenuItem key={item.id} value={item.id}>
-                      {item.name}
-                    </MenuItem>
-                  );
-                })}
-              </Select>
-            </FormControl>
-          </Grid>
+              />
+            </Grid>
 
-          <Grid item xs={12}>
-            <FormControl variant="outlined" className={classes.formControl}>
-              <InputLabel >กรุ๊ปเลือด</InputLabel>
-              <Select
-                name="bloodtype"
-                value={patient.bloodtype || ''}
-                onChange={handleChange}
-                label="กรุ๊ปเลือด"
+            <Grid item xs={12}>
+              <FormControl variant="outlined" className={classes.formControl}>
+                <InputLabel >สถานะผู้ป่วย</InputLabel>
+                <Select
+                  name="status"
+                  value={patient.status || ''}
+                  onChange={handleChange}
+                  label="สถานะผู้ป่วย"
+                >
+                  {statuss.map(item => {
+                    return (
+                      <MenuItem key={item.id} value={item.id}>
+                        {item.name}
+                      </MenuItem>
+                    );
+                  })}
+                </Select>
+              </FormControl>
+            </Grid>
+
+            <Grid item xs={12}>
+              <FormControl variant="outlined" className={classes.formControl}>
+                <InputLabel >คำนำหน้าชื่อ</InputLabel>
+                <Select
+                  name="nametitle"
+                  value={patient.nametitle || ''}
+                  onChange={handleChange}
+                  label="คำนำหน้าชื่อ"
+                  fullWidth
+                >
+                  {nametitles.map(item => {
+                    return (
+                      <MenuItem key={item.id} value={item.id}>
+                        {item.name}
+                      </MenuItem>
+                    );
+                  })}
+                </Select>
+              </FormControl>
+            </Grid>
+
+            <Grid item xs={10}>
+              <TextField
+                required={true}
+                error={!patient.name && showInputError}
+                name="name"
+                label="ชื่อ-นามสกุล"
+                variant="outlined"
                 fullWidth
-              >
-                {bloodtypes.map(item => {
-                  return (
-                    <MenuItem key={item.id} value={item.id}>
-                      {item.name}
-                    </MenuItem>
-                  );
-                })}
-              </Select>
-            </FormControl>
-          </Grid>
-
-          <Grid item xs={10}>
-            <TextField
-              name="address"
-              label="ที่อยู่"
-              variant="outlined"
-              fullWidth
-              multiline
-              value={patient.address || ''}
-              onChange={handleChange}
-            />
-          </Grid>
-
-          <Grid item xs={10}>
-            <h2 style={{ textAlign: 'center' }}> ข้อมูลทางการแพทย์ </h2>
-          </Grid>
-
-          <Grid item xs={10}>
-            <TextField
-              required={true}
-              error={!patient.congenital && showInputError}
-              name="congenital"
-              label="โรคประจำตัว"
-              variant="outlined"
-              fullWidth
-              multiline
-              value={patient.congenital || ""}
-              onChange={handleChange}
-            />
-          </Grid>
-
-          <Grid item xs={10}>
-            <TextField
-              required={true}
-              error={!patient.allergic && showInputError}
-              name="allergic"
-              label="ประวัติการแพ้ยา"
-              variant="outlined"
-              fullWidth
-              multiline
-              value={patient.allergic || ""}
-              onChange={handleChange}
-            />
-          </Grid>
-
-          <Grid item xs={12}>
-            <FormControl variant="outlined" className={classes.formControl}>
-              <InputLabel >ผู้บันทึก</InputLabel>
-              <Select
-                name="employee"
-                value={patient.employee || ''}
+                multiline
+                value={patient.name || ""}
                 onChange={handleChange}
-                label="ผู้บันทึก"
-                fullWidth
-              >
-                {employees.map(item => {
-                  return (
-                    <MenuItem key={item.id} value={item.id}>
-                      {item.userId}
-                    </MenuItem>
-                  );
-                })}
-              </Select>
-            </FormControl>
-          </Grid>
+              />
+            </Grid>
 
-          <Grid item xs={10}>
-            <Button
-              name="saveData"
-              size="large"
-              variant="contained"
-              color="primary"
-              disableElevation
-              className={classes.buttonSty}
-              onClick={save}
-            >
-              บันทึกข้อมูล
+            <Grid item xs={12}>
+              <FormControl variant="outlined" className={classes.formControl}>
+                <InputLabel>เพศ</InputLabel>
+                <Select
+                  name="gender"
+                  value={patient.gender || ''}
+                  onChange={handleChange}
+                  label="เพศ"
+                >
+                  {genders.map(item => {
+                    return (
+                      <MenuItem key={item.id} value={item.id}>
+                        {item.name}
+                      </MenuItem>
+                    );
+                  })}
+                </Select>
+              </FormControl>
+            </Grid>
+
+            <Grid item xs={12}>
+              <FormControl variant="outlined" className={classes.formControl}>
+                <InputLabel >กรุ๊ปเลือด</InputLabel>
+                <Select
+                  name="bloodtype"
+                  value={patient.bloodtype || ''}
+                  onChange={handleChange}
+                  label="กรุ๊ปเลือด"
+                  fullWidth
+                >
+                  {bloodtypes.map(item => {
+                    return (
+                      <MenuItem key={item.id} value={item.id}>
+                        {item.name}
+                      </MenuItem>
+                    );
+                  })}
+                </Select>
+              </FormControl>
+            </Grid>
+
+            <Grid item xs={10}>
+              <TextField
+                name="address"
+                label="ที่อยู่"
+                variant="outlined"
+                fullWidth
+                multiline
+                value={patient.address || ''}
+                onChange={handleChange}
+              />
+            </Grid>
+
+            <Grid item xs={10}>
+              <h2 style={{ textAlign: 'center' }}> ข้อมูลทางการแพทย์ </h2>
+            </Grid>
+
+            <Grid item xs={10}>
+              <TextField
+                required={true}
+                error={!patient.congenital && showInputError}
+                name="congenital"
+                label="โรคประจำตัว"
+                variant="outlined"
+                fullWidth
+                multiline
+                value={patient.congenital || ""}
+                onChange={handleChange}
+              />
+            </Grid>
+
+            <Grid item xs={10}>
+              <TextField
+                required={true}
+                error={!patient.allergic && showInputError}
+                name="allergic"
+                label="ประวัติการแพ้ยา"
+                variant="outlined"
+                fullWidth
+                multiline
+                value={patient.allergic || ""}
+                onChange={handleChange}
+              />
+            </Grid>
+
+            <Grid item xs={12}>
+              <FormControl variant="outlined" className={classes.formControl}>
+                <InputLabel >ผู้บันทึก</InputLabel>
+                <Select
+                  name="employee"
+                  value={patient.employee || ''}
+                  onChange={handleChange}
+                  label="ผู้บันทึก"
+                  fullWidth
+                >
+                  {employees.map(item => {
+                    return (
+                      <MenuItem key={item.id} value={item.id}>
+                        {item.userId}
+                      </MenuItem>
+                    );
+                  })}
+                </Select>
+              </FormControl>
+            </Grid>
+
+            <Grid item xs={10}>
+              <Button
+                name="saveData"
+                size="large"
+                variant="contained"
+                color="primary"
+                disableElevation
+                className={classes.buttonSty}
+                onClick={save}
+              >
+                บันทึกข้อมูล
               </Button>
+            </Grid>
           </Grid>
-        </Grid>
-      </Container>
+        </Container>
       </Content>
     </div>
   );

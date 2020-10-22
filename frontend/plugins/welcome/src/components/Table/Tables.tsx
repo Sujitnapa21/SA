@@ -7,13 +7,45 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import Button from '@material-ui/core/Button';
 import { DefaultApi } from '../../api/apis';
-const useStyles = makeStyles({
- table: {
-   minWidth: 650,
- },
-});
+import MenuIcon from '@material-ui/icons/Menu';
+import AccountCircle from '@material-ui/icons/AccountCircle';
+import Link from '@material-ui/core/Link';
+import {
+    Content,
+    ContentHeader,
+} from '@backstage/core';
+import { Link as RouterLink } from 'react-router-dom';
+import {
+    Button,
+    AppBar,
+    Toolbar,
+    Typography,
+    IconButton
+} from '@material-ui/core';
+
+
+const useStyles = makeStyles(theme => ({
+    table: {
+        minWidth: 650,
+    },
+    title: {
+        flexGrow: 1,
+    },
+    menuButton: {
+        marginRight: theme.spacing(2),
+    },
+    logoutButton: {
+        marginLeft: 10,
+        marginRight: 10,
+        color: 'white'
+    }
+}));
+
+function redirecLogOut() {
+    // redire Page ... http://localhost:3000/
+    window.location.href = "http://localhost:3000/";
+}
  
 export default function ComponentsTable() {
  const classes = useStyles();
@@ -30,10 +62,50 @@ export default function ComponentsTable() {
 
    getPatients();
  }, [loading]);
+
+ 
  
 
  
  return (
+  <div>
+  <AppBar position="static">
+      <Toolbar>
+          <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+              <MenuIcon />
+          </IconButton>
+          <Typography variant="h4" className={classes.title}>
+              ระบบจัดการโรคติดต่อ
+</Typography>
+          <IconButton
+              aria-label="account of current user"
+              aria-controls="menu-appbar"
+              aria-haspopup="true"
+              color="inherit"
+              size="medium"
+          >
+              <AccountCircle />
+              <Typography>
+                  <Link variant="h6" onClick={redirecLogOut} className={classes.logoutButton}>
+                      LOGOUT
+  </Link>
+              </Typography>
+          </IconButton>
+      </Toolbar>
+  </AppBar>
+  <Content>
+  <ContentHeader title="">
+      <Button
+          size="large"
+          style={{ float: 'right', marginBottom: 'auto' }}
+          color="primary"
+          component={RouterLink}
+          to="/Patient"
+          variant="contained"
+      >
+          เพิ่มข้อมูลโรคติดต่อ
+   </Button>
+   </ContentHeader>
    <TableContainer component={Paper}>
      <Table className={classes.table} aria-label="simple table">
        <TableHead>
@@ -73,5 +145,7 @@ export default function ComponentsTable() {
        </TableBody>
      </Table>
    </TableContainer>
+   </Content>
+   </div>
  );
 }
