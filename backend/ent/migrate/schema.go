@@ -11,7 +11,7 @@ var (
 	// BloodtypesColumns holds the columns for the "bloodtypes" table.
 	BloodtypesColumns = []*schema.Column{
 		{Name: "id", Type: field.TypeInt, Increment: true},
-		{Name: "name", Type: field.TypeString},
+		{Name: "name", Type: field.TypeString, Unique: true},
 	}
 	// BloodtypesTable holds the schema information for the "bloodtypes" table.
 	BloodtypesTable = &schema.Table{
@@ -23,7 +23,7 @@ var (
 	// EmployeesColumns holds the columns for the "employees" table.
 	EmployeesColumns = []*schema.Column{
 		{Name: "id", Type: field.TypeInt, Increment: true},
-		{Name: "user_id", Type: field.TypeString},
+		{Name: "user_id", Type: field.TypeString, Unique: true},
 	}
 	// EmployeesTable holds the schema information for the "employees" table.
 	EmployeesTable = &schema.Table{
@@ -35,7 +35,7 @@ var (
 	// GendersColumns holds the columns for the "genders" table.
 	GendersColumns = []*schema.Column{
 		{Name: "id", Type: field.TypeInt, Increment: true},
-		{Name: "name", Type: field.TypeString},
+		{Name: "name", Type: field.TypeString, Unique: true},
 	}
 	// GendersTable holds the schema information for the "genders" table.
 	GendersTable = &schema.Table{
@@ -47,7 +47,7 @@ var (
 	// NameTitlesColumns holds the columns for the "name_titles" table.
 	NameTitlesColumns = []*schema.Column{
 		{Name: "id", Type: field.TypeInt, Increment: true},
-		{Name: "name", Type: field.TypeString},
+		{Name: "name", Type: field.TypeString, Unique: true},
 	}
 	// NameTitlesTable holds the schema information for the "name_titles" table.
 	NameTitlesTable = &schema.Table{
@@ -116,7 +116,7 @@ var (
 	// StatusColumns holds the columns for the "status" table.
 	StatusColumns = []*schema.Column{
 		{Name: "id", Type: field.TypeInt, Increment: true},
-		{Name: "name", Type: field.TypeString},
+		{Name: "name", Type: field.TypeString, Unique: true},
 	}
 	// StatusTable holds the schema information for the "status" table.
 	StatusTable = &schema.Table{

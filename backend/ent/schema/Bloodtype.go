@@ -14,7 +14,7 @@ type Bloodtype struct {
 // Fields of the Bloodtype.
 func (Bloodtype) Fields() []ent.Field {
 	return []ent.Field{
-		field.String("Name"),
+		field.String("Name").Unique(),
 	}
 }
 

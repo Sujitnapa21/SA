@@ -14,7 +14,7 @@ type NameTitle struct {
 // Fields of the NameTitle.
 func (NameTitle) Fields() []ent.Field {
 	return []ent.Field{
-		field.String("Name"),
+		field.String("Name").Unique(),
 	}
 }
 

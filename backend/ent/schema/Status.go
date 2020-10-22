@@ -14,7 +14,7 @@ type Status struct {
 // Fields of the Status.
 func (Status) Fields() []ent.Field {
 	return []ent.Field{
-		field.String("Name"),
+		field.String("Name").Unique(),
 	}
 }
 
@@ -22,6 +22,5 @@ func (Status) Fields() []ent.Field {
 func (Status) Edges() []ent.Edge {
 	return []ent.Edge{
 		edge.To("patient", Patient.Type),
-		
 	}
 }
