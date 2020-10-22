@@ -67,7 +67,7 @@ export default function ComponentsTable() {
              <TableCell align="center">{item.address}</TableCell>
              <TableCell align="center">{item.congenital}</TableCell>
              <TableCell align="center">{item.allergic}</TableCell>
-             <TableCell align="center">{item.edges?.employee?.name}</TableCell>
+             <TableCell align="center">{item.edges?.employee?.userId}</TableCell>
              <TableCell align="center">
                <Button
                  onClick={() => {
